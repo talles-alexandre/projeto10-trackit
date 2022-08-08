@@ -8,13 +8,23 @@ import Histotico from "./Historico/Historico";
 import MyContext from "../contexts/MyContext";
 export default function App() {
   const [token, setToken] = useState("");
+  const [userImg, setUserImg] = useState("");
   const [habitos, setHabitos] = useState([]);
   const [habhoje, setHabHoje] = useState(null);
 
   return (
     <BrowserRouter>
       <MyContext.Provider
-        value={{ token, setToken, habitos, setHabitos, habhoje, setHabHoje }}
+        value={{
+          token,
+          setToken,
+          userImg,
+          setUserImg,
+          habitos,
+          setHabitos,
+          habhoje,
+          setHabHoje,
+        }}
       >
         <Routes>
           <Route path="/" element={<Login />} />

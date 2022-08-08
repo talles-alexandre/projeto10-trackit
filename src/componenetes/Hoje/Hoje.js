@@ -48,17 +48,13 @@ export default function Hoje() {
     );
   }
 
-  function addHabito1() {
-    console.log(habhoje);
-  }
-
   function addHabito() {
     const URL1 =
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
 
     const promise = axios.post(
       URL1,
-      { name: "Codar", days: [1, 3, 5] },
+      { name: "Hábito1", days: [1, 3, 5] },
       config
     );
 

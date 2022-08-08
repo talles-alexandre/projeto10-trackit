@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 export default function Home() {
   const { token, setToken } = useContext(MyContext);
+  const { userImg, setUserImg } = useContext(MyContext);
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -26,6 +28,7 @@ export default function Home() {
       console.log(data);
       setToken(data.token);
       localStorage.setItem("token", JSON.stringify(data.token));
+      setUserImg(data.image);
       navigate("/hoje");
     });
 

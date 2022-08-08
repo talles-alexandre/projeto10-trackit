@@ -1,14 +1,15 @@
 import styled from "styled-components";
+import React, { useContext } from "react";
+import MyContext from "../contexts/MyContext";
 
 export default function Topo() {
+  const { userImg } = useContext(MyContext);
+
   return (
     <>
       <Header>
         TrackIt
-        <img
-          src="https://psicologianoesporte.com.br/wp-content/uploads/2016/03/atencao-teste.jpg"
-          alt="logo"
-        />
+        <img src={userImg} alt="logo" />
       </Header>
     </>
   );

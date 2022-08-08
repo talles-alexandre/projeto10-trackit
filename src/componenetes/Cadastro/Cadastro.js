@@ -14,10 +14,8 @@ export default function Cadastro() {
   const [senha, setSenha] = useState("");
   const [nome, setNome] = useState("");
   const [foto, setFoto] = useState("");
-  //const [desativarinput, setDesativarinput] = useState(false);
 
   function cadastrar() {
-    //setDesativarinput(true)
     const promise = axios.post(URL, {
       email: email,
       name: nome,
@@ -46,28 +44,24 @@ export default function Cadastro() {
           type="email"
           placeholder="email"
           value={email}
-          //disabled={desativarinput}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="senha"
           value={senha}
-          //disabled={desativarinput}
           onChange={(e) => setSenha(e.target.value)}
         />
         <input
           type="text"
           placeholder="nome"
           value={nome}
-          //disabled={desativarinput}
           onChange={(e) => setNome(e.target.value)}
         />
         <input
           type="text"
           placeholder="foto"
           value={foto}
-          //disabled={desativarinput}
           onChange={(e) => setFoto(e.target.value)}
         />
 
