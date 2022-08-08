@@ -1,39 +1,37 @@
 import tracklt from "./../../assets/img/tracklt.png";
-import { useNavigate } from "react-router-dom";
-
 import styled from "styled-components";
 import { useState } from "react";
+import React, { useContext } from "react";
+import MyContext from "../../contexts/MyContext";
+
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-export default function Cadastro() {
+export default function Home() {
+  const { token, setToken } = useContext(MyContext);
   const navigate = useNavigate();
-
-  const URL =
-    "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
-
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [nome, setNome] = useState("");
-  const [foto, setFoto] = useState("");
-  //const [desativarinput, setDesativarinput] = useState(false);
 
-  function cadastrar() {
-    //setDesativarinput(true)
+  const URL =
+    "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
+
+  function login() {
     const promise = axios.post(URL, {
       email: email,
-      name: nome,
-      image: foto,
       password: senha,
     });
 
     promise.then((response) => {
       const { data } = response;
       console.log(data);
-      navigate("/");
+      setToken(data.token);
+      localStorage.setItem("token", JSON.stringify(data.token));
+      navigate("/hoje");
     });
 
     promise.catch((err) => {
       console.log(err.response);
-      alert("Erro ao Cadastrar");
+      alert("Erro ao Fazer login");
     });
   }
 
@@ -46,39 +44,23 @@ export default function Cadastro() {
           type="email"
           placeholder="email"
           value={email}
-          //disabled={desativarinput}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="senha"
           value={senha}
-          //disabled={desativarinput}
           onChange={(e) => setSenha(e.target.value)}
         />
-        <input
-          type="text"
-          placeholder="nome"
-          value={nome}
-          //disabled={desativarinput}
-          onChange={(e) => setNome(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="foto"
-          value={foto}
-          //disabled={desativarinput}
-          onChange={(e) => setFoto(e.target.value)}
-        />
+        <button onClick={login}>Entrar</button>
 
-        <button onClick={cadastrar}>Cadastrar</button>
-
-        <p onClick={() => navigate("/")}>já tem uma conta? Faça login!</p>
+        <p onClick={() => navigate("/cadastro")}>
+          Não tem uma conta? Cadastre-se!
+        </p>
       </Conteudo>
     </>
   );
 }
-
 const Conteudo = styled.div`
   margin: 70px 30px;
   display: flex;
